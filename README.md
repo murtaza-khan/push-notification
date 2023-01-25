@@ -16,4 +16,8 @@ npm install
 
 # serve app
 npm start
+
+# start service with docker
+docker-compose up -d --build
+
 ```

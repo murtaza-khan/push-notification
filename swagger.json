@@ -1,0 +1,141 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Push notification",
+    "description": "Push notification documentation API"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/user/create": {
+      "post": {
+        "tags": ["Users"],
+        "description": "Create new user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/notification/send-to-all": {
+      "post": {
+        "tags": ["Notifications"],
+        "description": "Send Notifications",
+        "parameters": [
+          {
+            "name": "notification",
+            "in": "body",
+            "description": "Notification that we want to send",
+            "schema": {
+              "$ref": "#/definitions/Notifications"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Notifications"
+            }
+          }
+        }
+      }
+    },
+    "/notification/send-by-email": {
+        "post": {
+          "tags": ["Notifications"],
+          "description": "Send Notifications for specific",
+          "parameters": [
+            {
+              "name": "notification",
+              "in": "body",
+              "description": "Notification that we want to send",
+              "schema": {
+                "$ref": "#/definitions/NotificationsByEmail"
+              }
+            }
+          ],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "schema": {
+                "$ref": "#/definitions/NotificationsByEmail"
+              }
+            }
+          }
+        }
+      }
+  },
+  "definitions": {
+    "User": {
+      "required": ["name", "email", "phone", "password", "notificationToken"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "notificationToken": {
+          "type": "string"
+        }
+      }
+    },
+    "Notifications": {
+      "required": ["title", "content"],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "NotificationsByEmail": {
+        "required": ["title", "content","email"],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      }
+  }
+}
